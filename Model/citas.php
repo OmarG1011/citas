@@ -22,5 +22,14 @@ class Citas {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    // Método para obtener doctores
+  public function getDoctors() {
+    $query = "SELECT nombre name FROM doctors"; // Adjust the query based on your database structure
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+    
 }
 ?>

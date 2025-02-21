@@ -8,14 +8,7 @@ class User
         $this->conn = $db;
     }
 
-    // public function register($username, $password)
-    // {
-    //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    //     $stmt = $this->conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-    //     $stmt->bindParam(':username', $username);
-    //     $stmt->bindParam(':password', $hashed_password);
-    //     return $stmt->execute();
-    // }
+
     public function usernameExists($username) {
         $stmt = $this->conn->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
         $stmt->bindParam(':username', $username);

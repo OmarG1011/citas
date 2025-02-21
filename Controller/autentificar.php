@@ -17,11 +17,19 @@ class AuthController {
             $password = $_POST['password'];
             
             if ($this->userModel->register($username, $password)) {
+                $_SESSION['sweet_alert'] = [
+                    'type' => 'success',
+                    'message' => '¡Nuevo usuario creado exitosamente!'
+                ];
                 header("Location: index.php?action=login");
                 exit();
             } else {
-                $error_message = "Error al registrar el usuario (nombre invalido o ya en uso)";
+                $_SESSION['sweet_alert'] = [
+                    'type' => 'error',
+                    'message' => 'Error al registrar el usuario (nombre invalido o ya en uso)'
+                ];
             }
+
         }
         include 'view/registro.php'; // Asegúrate de que la vista exista
     }
@@ -40,8 +48,12 @@ class AuthController {
                 header("Location: view/dashboard.php"); // Asegúrate de que la vista exista
                 exit();
             } else {
-                $error_message = "Usuario o contraseña incorrectos.";
+                $_SESSION['sweet_alert'] = [
+                    'type' => 'error',
+                    'message' => 'Usuario o contraseña incorrectos.'
+                ];
             }
+
         }
         include 'view/login.php'; // Cargar la vista de login
     }

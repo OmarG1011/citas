@@ -81,3 +81,18 @@ if ($_POST['action'] == 'addCita') {
         echo json_encode(['status' => 'error', 'message' => 'Error al agregar la cita.']);
     }
 }
+
+if ($_POST['action'] == 'getDoctores') {
+    // Depuración para asegurarnos de que la acción se recibe
+    error_log('Action getDoctores recibida');
+    $stmt = $db->prepare("SELECT nombre FROM doctores");
+    $stmt->execute();
+    $doctores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Verifica si se obtienen doctores
+    if ($doctores) {
+        echo json_encode($doctores);  // Enviar respuesta en caso de éxito
+    } else {
+        echo json_encode(['error' => 'No se encontraron doctores']);
+    }
+}

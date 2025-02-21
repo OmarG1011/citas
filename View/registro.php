@@ -29,15 +29,15 @@
     <!-- Enlace a Bootstrap 5 JS (opcional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-    <?php if (isset($error_message)): ?>
-        <script>
-            Swal.fire({
-                title: 'Error',
-                text: '<?php echo $error_message; ?>',
-                icon: 'error',
-                confirmButtonText: 'Aceptar'
-            });
-        </script>
-    <?php endif; ?>
+    <?php if (isset($_SESSION['sweet_alert'])): ?>
+    <script>
+        Swal.fire({
+            icon: '<?php echo $_SESSION['sweet_alert']['type']; ?>',
+            title: '<?php echo $_SESSION['sweet_alert']['message']; ?>',
+            showConfirmButton: true,
+            timer: 3000
+        });
+    </script>
+    <?php unset($_SESSION['sweet_alert']); endif; ?>
 </body>
 </html>
